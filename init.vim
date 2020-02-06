@@ -1,10 +1,12 @@
 setglobal nocompatible
+set hidden
+
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Common
 Plug '/usr/local/opt/fzf'
@@ -13,7 +15,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'preservim/nerdtree'
+
 
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -34,7 +39,24 @@ set nobackup
 set nowritebackup
 set nowb
 set noswapfile
-set bs=2
+
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 set background=dark
 colorscheme palenight
@@ -44,11 +66,18 @@ let g:airline_theme = "palenight"
 " Bindings
 
 let mapleader = "\<Space>"
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>o :GFiles .<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>p :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>s :StripWhitespace<CR>
 vmap <leader>y :.w !pbcopy<CR><CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+" Find symbol of current document
+nnoremap <silent> <leader>fo :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <leader>fs  :<C-u>CocList -I symbols<cr>
+map <C-b> :NERDTreeToggle<CR>
