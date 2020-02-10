@@ -80,7 +80,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nnoremap <silent> <leader>fo :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <leader>fs  :<C-u>CocList -I symbols<cr>
-map <C-b> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 
 " Relative numbering
 function! NumberToggle()
