@@ -19,7 +19,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'preservim/nerdtree'
 
-
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
 " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
@@ -61,6 +60,12 @@ endfunction
 set background=dark
 colorscheme palenight
 let g:airline_theme = "palenight"
+
+:set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.coffee setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd BufNewFile,BufRead *.coffee set syntax=javascript
 
 
 " Bindings
