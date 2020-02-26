@@ -67,6 +67,9 @@ autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabsto
 autocmd BufNewFile,BufRead *.coffee setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee set syntax=javascript
 
+" Show whitespaces
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:·,extends:⟩,precedes:⟨
+set list
 
 " Bindings
 
