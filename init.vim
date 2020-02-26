@@ -61,15 +61,14 @@ set background=dark
 colorscheme palenight
 let g:airline_theme = "palenight"
 
-:set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee set syntax=javascript
 
 " Show whitespaces
-set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:·,extends:⟩,precedes:⟨
-set list
+set list listchars=tab:→\ ,eol:↲,nbsp:␣,trail:·,space:·,extends:⟩,precedes:⟨
 
 " Bindings
 
