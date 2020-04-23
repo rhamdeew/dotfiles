@@ -61,7 +61,10 @@
   alias gcm='git commit -m'
   alias gca='git commit --amend'
   alias gt='git stash'
+  alias gplo='git pull origin'
+  alias gpso='git push origin'
 
+  alias dps='docker ps'
 
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   fpath+=${ZDOTDIR:-~}/.zsh_functions
