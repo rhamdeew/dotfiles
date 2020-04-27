@@ -31,7 +31,7 @@
   # Use NVM
   alias envm='source $(brew --prefix nvm)/nvm.sh && nvm use --delete-prefix v10.16.3'
   # Use Pyenv
-  alias pnv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'
+  alias pnv='eval "$(pyenv init -)"'
   # Use Rbenv
   alias rbnv='eval "$(rbenv init -)"'
   # Run NVim
@@ -40,6 +40,8 @@
   alias cdd='cd ~/Downloads'
   alias cdw='cd ~/Work'
   alias cdru='cd ~/Work/ruby/projects'
+  alias cdph='cd ~/Work/php/projects'
+  alias cdpy='cd ~/Work/python/projects'
 
   alias 7zz='7za a $1 $2 -p -v1000m -mhe=on -mx=0'
 
