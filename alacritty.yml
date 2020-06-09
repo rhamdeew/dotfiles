@@ -58,9 +58,6 @@ scrolling:
   # Specifying `0` will disable faux scrolling.
   #faux_multiplier: 3
 
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: false
-
 # Font configuration (changes require restart)
 font:
   # The normal (roman) font face to use.
