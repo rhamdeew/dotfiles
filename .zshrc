@@ -39,8 +39,11 @@ alias rbnv='eval "$(rbenv init -)"'
 alias nv='envm && rbnv && nvim'
 
 #TODO
-alias td='cat ~/.private_dec_g/Private/notes/TODO.md'
-alias tde='vim ~/.private_dec_g/Private/notes/TODO.md'
+alias td='cat ~/Super/Private/notes/TODO.md'
+alias tde='(cd ~/Super/Private/notes/ && vim TODO.md && git add TODO.md && git commit -m "update TODO")'
+
+#NOTES
+alias notes='(cd ~/.private_dec_g/Private/notes/ && vim && git add . && git commit -m "update notes")'
 
 #CD
 alias cdd='cd ~/Downloads'
