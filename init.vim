@@ -17,12 +17,13 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'drewtempelmeyer/palenight.vim'
-Plug 'preservim/nerdtree'
+Plug 'airblade/vim-gitgutter'
+" Plug 'preservim/nerdtree'
 
 " Ruby
-" Plug 'tpope/vim-haml', { 'for': 'haml' }
-" Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-" Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'tpope/vim-haml', { 'for': 'haml' }
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
 call plug#end()
 
@@ -77,17 +78,37 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fa :Rg<CR>
 nnoremap <leader>p :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>s :StripWhitespace<CR>
 vmap <leader>y :.w !pbcopy<CR><CR>
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
 
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 " Find symbol of current document
 nnoremap <silent> <leader>fo :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <leader>fs  :<C-u>CocList -I symbols<cr>
-map <C-n> :NERDTreeToggle<CR>
+" map <C-n> :NERDTreeToggle<CR>
 
 " Relative numbering
 function! NumberToggle()
