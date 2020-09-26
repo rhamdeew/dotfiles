@@ -14,6 +14,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'drewtempelmeyer/palenight.vim'
+Plug 'airblade/vim-gitgutter'
 
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -35,6 +36,7 @@ set nowritebackup
 set nowb
 set noswapfile
 set bs=2
+set hlsearch
 
 set background=dark
 colorscheme palenight
@@ -57,10 +59,15 @@ nnoremap <Leader>q :q<CR>
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fa :Rg<CR>
 nnoremap <leader>p :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>s :StripWhitespace<CR>
 vmap <leader>y :.w !pbcopy<CR><CR>
+map <C-k> <C-w><Up>
+map <C-j> <C-w><Down>
+map <C-l> <C-w><Right>
+map <C-h> <C-w><Left>
 
 " Relative numbering
 function! NumberToggle()
@@ -80,4 +87,3 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
-
