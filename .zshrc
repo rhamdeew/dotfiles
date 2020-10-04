@@ -52,25 +52,50 @@ setopt share_history          # share command history data
 
 
 #Aliases
+#
+# Poetry
+alias po='poetry'
 
 # Use NVM
-alias envm='source $(brew --prefix nvm)/nvm.sh && nvm use --delete-prefix v10.16.3'
-# Use Pyenv
-alias pnv='eval "$(pyenv init -)"'
-alias po='poetry'
-# Use Rbenv
-alias rbnv='eval "$(rbenv init -)"'
-# Run NVim
-alias nv='envm && pnv && rbnv && nvim'
 
+# This lazy loads nvm
+export NVM_DIR="$HOME/.nvm"
+nvm() {
+  unset -f nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+  nvm $@
+}
+
+# This resolves the default node version
+DEFAULT_NODE_VER="$( (< "$NVM_DIR/alias/default" || < ~/.nvmrc) 2> /dev/null)"
+while [ -s "$NVM_DIR/alias/$DEFAULT_NODE_VER" ] && [ ! -z "$DEFAULT_NODE_VER" ]; do
+  DEFAULT_NODE_VER="$(<"$NVM_DIR/alias/$DEFAULT_NODE_VER")"
+done
+
+# This adds the default node version to PATH
+if [ ! -z "$DEFAULT_NODE_VER" ]; then
+  export PATH="$NVM_DIR/versions/node/v${DEFAULT_NODE_VER#v}/bin:$PATH"
+fi
+
+# Use Pyenv
+alias pyenvi='eval "$(pyenv init -)"'
+# Use Rbenv
+alias rbenvi='eval "$(rbenv init -)"'
+
+#Run Neovim
+alias nv='pyenvi && rbenvi && nvim'
+
+
+export NOTES_DIR="~/.private_dec_g/Private/notes/"
 
 #TODO
-alias td='cat ~/.private_dec_g/Private/notes/TODO.md'
-alias tde='(cd ~/.private_dec_g/Private/notes/ && vim TODO.md && git add TODO.md && git commit -m "update TODO")'
-
+alias td="cat $NOTES_DIR/TODO.md"
+alias tde="(cd $NOTES_DIR && vim TODO.md && git add TODO.md && git commit -m 'update TODO')"
 
 #NOTES
-alias notes='(cd ~/.private_dec_g/Private/notes/ && vim && git add . && git commit -m "update notes")'
+alias n="cd $NOTES_DIR && vim"
+alias nt="cd $NOTES_DIR && vim tmp.md"
+alias nu="(cd $NOTES_DIR && git add . && git commit -m 'update notes')"
 
 
 #CD
@@ -106,6 +131,7 @@ alias gcm='git commit -m'
 alias gca='git commit --amend'
 alias gd='git diff'
 alias gt='git stash'
+alias gms='BRANCH=$(git branch --show-current); git checkout staging; git merge $BRANCH; git push origin staging; git checkout $BRANCH'
 
 
 # Docker aliases
@@ -129,3 +155,6 @@ autoload -U fzf-git-merge
 alias gbf='fzf-git-branch'
 alias gcf='fzf-git-checkout'
 alias gmef='fzf-git-merge'
+
+# Init zoxide
+eval "$(zoxide init zsh)"
