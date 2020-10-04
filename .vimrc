@@ -7,13 +7,13 @@ filetype plugin on    " Enable filetype-specific plugins
 call plug#begin('~/.vim/plugged')
 
 " Common
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 
 " Ruby
@@ -24,6 +24,12 @@ Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Settings
+
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 set number
 highlight LineNr ctermfg=grey
@@ -39,8 +45,8 @@ set bs=2
 set hlsearch
 
 set background=dark
-colorscheme palenight
-let g:airline_theme = "palenight"
+colorscheme onedark
+let g:airline_theme = "onedark"
 
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
