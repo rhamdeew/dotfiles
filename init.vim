@@ -68,6 +68,7 @@ autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee set syntax=javascript
+set clipboard=unnamed
 
 " Show whitespaces
 set list listchars=tab:→\ ,eol:↲,nbsp:␣,trail:·,space:·,extends:⟩,precedes:⟨
@@ -80,10 +81,10 @@ nnoremap <leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
 nnoremap <leader>fa :Rg<CR>
+nnoremap <leader>fp :let @+ = expand("%")<CR>
 nnoremap <leader>p :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>s :StripWhitespace<CR>
-vmap <leader>y :.w !pbcopy<CR><CR>
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
