@@ -111,31 +111,8 @@ alias efs='gocryptfs ~/Dropbox/Private_g/ ~/.private_dec_g/'
 alias skey='grep -rlR "PRIVATE" ~/.ssh | grep -e 'ssh\/id_rsa' | xargs ssh-add'
 
 
-# Ripgrep aliases
-alias rgl='rg -l'
-
-
-# Git aliases
-alias gs='git status --short'
-alias ga='git add'
-alias gb='git branch'
-alias gc='git checkout'
-alias gme='git merge'
-alias gplo='git pull origin $(git branch --show-current)'
-alias gpso='git push origin $(git branch --show-current)'
-alias gl='git log'
-alias glp='git log -p'
-alias gln='git log --name-only'
-alias gcv='git commit -v'
-alias gcm='git commit -m'
-alias gca='git commit --amend'
-alias gd='git diff'
-alias gt='git stash'
-alias gms='BRANCH=$(git branch --show-current); git checkout staging; git merge $BRANCH; git push origin staging; git checkout $BRANCH'
-
-
-# Docker aliases
-alias dps='docker ps'
+# Import shared aliases
+[ -f ~/.shared_aliases ] && source ~/.shared_aliases
 
 
 # Individual work-related settings
