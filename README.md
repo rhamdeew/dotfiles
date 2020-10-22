@@ -3,43 +3,69 @@
 ### Change directory
 
 ```cd ~/Downloads``` - cdd
+
 ```cd ~/Work``` - cdw
 
 ### Git commands
 
-```git status``` - gs
+```git status --short``` - gs
+
 ```git add``` - ga
 
+---
+
 ```git branch``` - gb
+
 ```git checkout``` - gc
+
 ```git merge``` - gme
 
 ```git diff``` - gd
 
+---
+
 ```git log``` - gl
+
 ```git log -p``` - glp
+
 ```git log --name-only``` - gln
 
+---
+
 ```git commit -v``` - gcv
+
 ```git commit -m``` - gcm
+
 ```git commit --amend``` - gca
+
+---
 
 ```git stash``` - gt
 
+---
+
 ```git pull origin``` - gplo
+
 ```git push origin``` - gpso
 
 
 ##  Software version management
 
 Use NVM
-```source $(brew --prefix nvm)/nvm.sh && nvm use --delete-prefix v10.16.3``` - envm
+
+nvm
+
+---
 
 Use Pyenv
-```eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"``` - pnv
+
+```eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"``` - pyenvi
+
+---
 
 Use Rbenv
-```eval "$(rbenv init -)"``` - rbnv
+
+```eval "$(rbenv init -)"``` - rbenvi
 
 ## Ripgrep
 
@@ -94,8 +120,9 @@ Theme configuration. Use JetBrains Mono font.
 
 **Hotkeys:**
 
-```Ctrl+B "``` - split panels horizontally
 
-```Ctrl+B %``` - split panels vertically
+```Ctrl+b "``` - split panels horizontally
 
-```Ctrl+B C``` - new window
+```Ctrl+b %``` - split panels vertically
+
+```Ctrl+b C``` - new window
