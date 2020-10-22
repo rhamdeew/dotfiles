@@ -15,6 +15,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'preservim/nerdtree'
 
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -51,6 +52,8 @@ let g:airline_theme = "onedark"
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee set syntax=javascript
 set clipboard=unnamed
@@ -75,6 +78,18 @@ map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
+
+function! NerdTreeToggleFind()
+  if exists("g:NERDTree") && g:NERDTree.IsOpen()
+    NERDTreeClose
+  elseif filereadable(expand('%'))
+    NERDTreeFind
+  else
+    NERDTree
+  endif
+endfunction
+
+nnoremap <C-n> :call NerdTreeToggleFind()<CR>
 
 " Relative numbering
 function! NumberToggle()

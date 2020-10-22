@@ -18,7 +18,7 @@ Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
-" Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree'
 
 " Ruby
 Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -66,6 +66,8 @@ let g:airline_theme = "onedark"
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype css setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd BufNewFile,BufRead *.coffee set syntax=javascript
 set clipboard=unnamed
@@ -90,6 +92,8 @@ map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
 
+" Neovim specific config part begin
+
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -110,7 +114,20 @@ endfunction
 nnoremap <silent> <leader>fo :<C-u>CocList outline<cr>
 " Search workspace symbols
 nnoremap <silent> <leader>fs  :<C-u>CocList -I symbols<cr>
-" map <C-n> :NERDTreeToggle<CR>
+
+" Neovim specific config part end
+
+function! NerdTreeToggleFind()
+  if exists("g:NERDTree") && g:NERDTree.IsOpen()
+    NERDTreeClose
+  elseif filereadable(expand('%'))
+    NERDTreeFind
+  else
+    NERDTree
+  endif
+endfunction
+
+nnoremap <C-n> :call NerdTreeToggleFind()<CR>
 
 " Relative numbering
 function! NumberToggle()
