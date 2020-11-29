@@ -16,6 +16,7 @@ Plug 'tpope/vim-commentary'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'preservim/nerdtree'
+Plug 'easymotion/vim-easymotion'
 
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -44,6 +45,7 @@ set nowb
 set noswapfile
 set bs=2
 set hlsearch
+set hidden
 
 set background=dark
 colorscheme onedark
@@ -109,3 +111,10 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Snippets
+ab ss screenshot_and_save_page
+ab bb byebug
+ab cl console.log
+ab pdb import pdb; pdb.set_trace()
+ab pudb import pudb; pudb.set_trace()
