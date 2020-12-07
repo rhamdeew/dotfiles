@@ -68,6 +68,7 @@ set list listchars=tab:→\ ,eol:↲,nbsp:␣,trail:·,space:·,extends:⟩,prec
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>x :x<CR>
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
