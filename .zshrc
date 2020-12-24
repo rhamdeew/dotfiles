@@ -93,8 +93,8 @@ alias td="cat $NOTES_DIR/TODO.md"
 alias tde="(cd $NOTES_DIR && vim TODO.md && git add TODO.md && git commit -m 'update TODO')"
 
 #NOTES
-alias n="cd $NOTES_DIR && vim"
-alias nt="cd $NOTES_DIR && vim tmp.md"
+alias n="(cd $NOTES_DIR && vim)"
+alias nt="(cd $NOTES_DIR && vim tmp.md)"
 alias nu="(cd $NOTES_DIR && git add . && git commit -m 'update notes')"
 
 
