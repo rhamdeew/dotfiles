@@ -18,8 +18,8 @@ Plug 'tpope/vim-commentary'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
+Plug 'mcchrish/nnn.vim'
 
 " Ruby
 Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -127,17 +127,13 @@ nnoremap <silent> <leader>fs  :<C-u>CocList -I symbols<cr>
 
 " Neovim specific config part end
 
-function! NerdTreeToggleFind()
-  if exists("g:NERDTree") && g:NERDTree.IsOpen()
-    NERDTreeClose
-  elseif filereadable(expand('%'))
-    NERDTreeFind
-  else
-    NERDTree
-  endif
-endfunction
+let g:nnn#set_default_mappings = 0
+nnoremap <leader>n :NnnPicker %:p:h<CR>
 
-nnoremap <C-n> :call NerdTreeToggleFind()<CR>
+let g:nnn#action = {
+      \ '<c-t>': 'tab split',
+      \ '<c-x>': 'split',
+      \ '<c-v>': 'vsplit' }
 
 " Relative numbering
 function! NumberToggle()

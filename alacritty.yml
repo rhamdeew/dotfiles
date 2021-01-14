@@ -65,7 +65,7 @@ font:
 
   # The bold font face
   bold:
-    family: JetBrans Mono
+    family: JetBrains Mono
     style: Regular
     #style: Bold
 

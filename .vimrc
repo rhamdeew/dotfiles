@@ -15,8 +15,8 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
+Plug 'mcchrish/nnn.vim'
 
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -82,17 +82,8 @@ map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
 
-function! NerdTreeToggleFind()
-  if exists("g:NERDTree") && g:NERDTree.IsOpen()
-    NERDTreeClose
-  elseif filereadable(expand('%'))
-    NERDTreeFind
-  else
-    NERDTree
-  endif
-endfunction
-
-nnoremap <C-n> :call NerdTreeToggleFind()<CR>
+let g:nnn#set_default_mappings = 0
+nnoremap <leader>n :NnnPicker %:p:h<CR>
 
 " Relative numbering
 function! NumberToggle()
