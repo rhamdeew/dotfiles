@@ -108,7 +108,7 @@ Leader key - ```<Space>```
 
 **Additional Neovim plugins:**
 - coc.nvim
-- nerdtree
+- nnn
 
 
 ## Alacritty
