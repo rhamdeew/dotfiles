@@ -17,8 +17,10 @@ alias gcv='git commit -v'
 alias gcm='git commit -m'
 alias gca='git commit --amend'
 alias gd='git diff'
-alias gt='git stash'
 alias gms='BRANCH=$(git branch --show-current); git checkout staging; git merge $BRANCH; git push origin staging; git checkout $BRANCH'
+alias gda='git diff --color --name-only --diff-filter=A'
+alias gdm='git diff --color --name-only --diff-filter=M'
+alias gdd='git diff --color --name-only --diff-filter=D'
 
 
 # Docker aliases
