@@ -96,6 +96,7 @@ nnoremap <leader>fp :let @+ = expand("%")<CR>
 nnoremap <leader>p :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>s :StripWhitespace<CR>
+nnoremap <leader>/ :noh<CR>
 map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
