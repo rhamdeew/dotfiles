@@ -20,9 +20,13 @@ Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'mcchrish/nnn.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'jiangmiao/auto-pairs'
 
 " Ruby
 Plug 'tpope/vim-haml', { 'for': 'haml' }
+Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 
@@ -46,6 +50,7 @@ set nowritebackup
 set nowb
 set noswapfile
 set hidden
+set autoread
 
 
 " You will have bad experience for diagnostic messages when it's default 4000.
@@ -91,6 +96,7 @@ nnoremap <leader>x :x<CR>
 nnoremap <leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fa :Rg<CR>
 nnoremap <leader>fp :let @+ = expand("%")<CR>
 nnoremap <leader>p :Commands<CR>

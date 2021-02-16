@@ -17,6 +17,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'mcchrish/nnn.vim'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 
 " Ruby
 " Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -46,6 +48,7 @@ set noswapfile
 set bs=2
 set hlsearch
 set hidden
+set autoread
 
 set background=dark
 colorscheme onedark
@@ -72,6 +75,7 @@ nnoremap <Leader>x :x<CR>
 nnoremap <Leader>o :GFiles .<CR>
 nnoremap <leader>fc :Commits<CR>
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fa :Rg<CR>
 nnoremap <leader>fp :let @+ = expand("%")<CR>
 nnoremap <leader>p :Commands<CR>
