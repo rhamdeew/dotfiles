@@ -22,7 +22,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'mcchrish/nnn.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 
 " Ruby
 Plug 'tpope/vim-haml', { 'for': 'haml' }
@@ -107,6 +107,9 @@ map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
+
+" Replace visual selection by pressing Ctrl+R
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Neovim specific config part begin
 

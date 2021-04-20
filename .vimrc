@@ -87,6 +87,9 @@ map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
 
+" Replace visual selection by pressing Ctrl+R
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 let g:nnn#set_default_mappings = 0
 nnoremap <leader>n :NnnPicker %:p:h<CR>
 
