@@ -105,6 +105,8 @@ alias cdru='cd ~/Work/ruby/projects'
 alias cdph='cd ~/Work/php/projects'
 alias cdpy='cd ~/Work/python/projects'
 
+alias tn='tmux new -s'
+
 
 #Key management
 alias efs='gocryptfs ~/Dropbox/Private_g/ ~/.private_dec_g/'
