@@ -99,6 +99,7 @@ nnoremap <leader>ff :Files<CR>
 nnoremap <leader>ft :Tags<CR>
 nnoremap <leader>fa :Rg<CR>
 nnoremap <leader>fp :let @+ = expand("%")<CR>
+nnoremap <leader>fr :! codium --disable-extensions "%"<CR>
 nnoremap <leader>p :Commands<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>s :StripWhitespace<CR>
