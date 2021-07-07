@@ -166,8 +166,12 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 
 " Snippets
-ab ss screenshot_and_save_page
-ab bb byebug
-ab cl console.log
+ab ssp screenshot_and_save_page
+ab bbg byebug
+ab csl console.log
 ab pdb import pdb; pdb.set_trace()
 ab pudb import pudb; pudb.set_trace()
+
+" https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
+" Enable hotkeys for Russian layout
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz

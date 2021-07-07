@@ -86,6 +86,7 @@ map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
+nmap     <leader>fr <Plug>CtrlSFPrompt
 
 " Replace visual selection by pressing Ctrl+R
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
@@ -113,8 +114,12 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 
 " Snippets
-ab ss screenshot_and_save_page
-ab bb byebug
-ab cl console.log
+ab ssp screenshot_and_save_page
+ab bbg byebug
+ab csl console.log
 ab pdb import pdb; pdb.set_trace()
 ab pudb import pudb; pudb.set_trace()
+
+" https://github.com/vim/vim/blob/master/runtime/doc/russian.txt
+" Enable hotkeys for Russian layout
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
