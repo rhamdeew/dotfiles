@@ -98,6 +98,11 @@ alias nt="(cd $NOTES_DIR && vim tmp.md)"
 alias nu="(cd $NOTES_DIR && git add . && git commit -m 'update notes')"
 
 
+#Using exa instead ls
+alias l="exa -lah --git"
+alias lt="exa -lahT --git"
+
+
 #CD
 alias cdd='cd ~/Downloads'
 alias cdw='cd ~/Work'
