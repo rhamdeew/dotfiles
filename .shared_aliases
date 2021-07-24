@@ -1,3 +1,11 @@
+# Neovim
+
+alias n='nvim'
+
+# Tmux
+alias tn='tmux new -s'
+
+
 # Ripgrep aliases
 alias rgl='rg -l'
 
@@ -23,5 +31,25 @@ alias gdm='git diff --color --name-only --diff-filter=M'
 alias gdd='git diff --color --name-only --diff-filter=D'
 
 
+# ls
+alias l="exa -lah --git"
+alias lt="exa -lahT --git"
+
+
+# cd
+alias cdd='cd ~/Downloads'
+alias cdw='cd ~/Work'
+
+
 # Docker aliases
 alias dps='docker ps'
+
+
+#TODO
+alias td="mkdir -p $NOTES_DIR && cat $NOTES_DIR/TODO.md"
+alias tde="mkdir -p $NOTES_DIR && (cd $NOTES_DIR && vim TODO.md && git add TODO.md && git commit -m 'update TODO')"
+
+
+#NOTES
+alias nt="mkdir -p $NOTES_DIR && (cd $NOTES_DIR && vim tmp.md)"
+alias nu="mkdir -p $NOTES_DIR && (cd $NOTES_DIR && git add . && git commit -m 'update notes')"

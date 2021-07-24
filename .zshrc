@@ -52,12 +52,29 @@ setopt share_history          # share command history data
 
 
 #Aliases
-#
+
+export NOTES_DIR="~/.notes/"
+# Personal work-related settings
+[ -f ~/.zshrc_work ] && source ~/.zshrc_work
+# Import shared aliases
+[ -f ~/.shared_aliases ] && source ~/.shared_aliases
+
+
+# Lang related aliases
+# --------------------
+
+
+# Python
+
 # Poetry
 alias po='poetry'
+# Use Pyenv
+alias pyenvi='eval "$(pyenv init -)"'
+
+
+# Node
 
 # Use NVM
-
 # This lazy loads nvm
 export NVM_DIR="$HOME/.nvm"
 nvm() {
@@ -77,53 +94,15 @@ if [ ! -z "$DEFAULT_NODE_VER" ]; then
   export PATH="$NVM_DIR/versions/node/v${DEFAULT_NODE_VER#v}/bin:$PATH"
 fi
 
-# Use Pyenv
-alias pyenvi='eval "$(pyenv init -)"'
+
+# Ruby
+
 # Use Rbenv
 alias rbenvi='eval "$(rbenv init -)"'
 
-#Run Neovim
+
+# Run Neovim with init pyenv and rbenv
 alias nv='pyenvi && rbenvi && nvim'
-alias n='nvim'
-
-
-export NOTES_DIR="~/.private_dec_g/Private/notes/"
-
-#TODO
-alias td="cat $NOTES_DIR/TODO.md"
-alias tde="(cd $NOTES_DIR && vim TODO.md && git add TODO.md && git commit -m 'update TODO')"
-
-#NOTES
-alias nt="(cd $NOTES_DIR && vim tmp.md)"
-alias nu="(cd $NOTES_DIR && git add . && git commit -m 'update notes')"
-
-
-#Using exa instead ls
-alias l="exa -lah --git"
-alias lt="exa -lahT --git"
-
-
-#CD
-alias cdd='cd ~/Downloads'
-alias cdw='cd ~/Work'
-alias cdru='cd ~/Work/ruby/projects'
-alias cdph='cd ~/Work/php/projects'
-alias cdpy='cd ~/Work/python/projects'
-
-alias tn='tmux new -s'
-
-
-#Key management
-alias efs='gocryptfs ~/Dropbox/Private_g/ ~/.private_dec_g/'
-alias skey='grep -rlR "PRIVATE" ~/.ssh | grep -e 'ssh\/id_rsa' | xargs ssh-add'
-
-
-# Import shared aliases
-[ -f ~/.shared_aliases ] && source ~/.shared_aliases
-
-
-# Individual work-related settings
-[ -f ~/.zshrc_work ] && source ~/.zshrc_work
 
 
 # Enable fzf auto-completions
@@ -139,6 +118,7 @@ autoload -U fzf-git-merge
 alias gbf='fzf-git-branch'
 alias gcf='fzf-git-checkout'
 alias gmef='fzf-git-merge'
+
 
 # Init zoxide
 eval "$(zoxide init zsh)"
