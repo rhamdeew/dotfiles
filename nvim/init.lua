@@ -1,3 +1,5 @@
+local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 
@@ -18,14 +20,12 @@ vim.api.nvim_exec(
 local use = require('packer').use
 require('packer').startup(function()
   use 'wbthomason/packer.nvim' -- Package manager
-  use 'tpope/vim-fugitive' -- Git commands in nvim
-  -- use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-  use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-  use 'ludovicchabant/vim-gutentags' -- Automatic tags management
+  use 'b3nj5m1n/kommentary'
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
-  use 'joshdick/onedark.vim' -- Theme inspired by Atom
-  use 'itchyny/lightline.vim' -- Fancier statusline
+  use 'sainnhe/everforest'
+  use 'kyazdani42/nvim-web-devicons'
+  use 'hoob3rt/lualine.nvim'
   -- Add indentation guides even on blank lines
   use 'lukas-reineke/indent-blankline.nvim'
   -- Add git related info in the signs columns and popups
@@ -70,17 +70,62 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
---Set colorscheme (order is important here)
-vim.o.termguicolors = true
-vim.g.onedark_terminal_italics = 2
-vim.cmd [[colorscheme onedark]]
+-- Colourscheme config
+vim.g.everforest_background = "soft"
+vim.g.everforest_enable_italic = 1
+vim.g.everforest_diagnostic_text_highlight = 1
+vim.g.everforest_diagnostic_virtual_text = "colored"
+vim.g.everforest_current_word = "bold"
+
+-- Load the colorscheme
+cmd([[colorscheme everforest]]) -- Put your favorite colorscheme here
 
 --Set statusbar
-vim.g.lightline = {
-  colorscheme = 'onedark',
-  active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
-  component_function = { gitbranch = 'fugitive#head' },
-}
+require("lualine").setup({
+  options = {
+    icons_enabled = true,
+    theme = "everforest",
+    component_separators = { " ", " " },
+    section_separators = { "", "" },
+    disabled_filetypes = {},
+  },
+  sections = {
+    lualine_a = { "mode", "paste" },
+    lualine_b = {
+      { "branch", icon = "" },
+      { "diff", color_added = "#a7c080", color_modified = "#ffdf1b", color_removed = "#ff6666" },
+    },
+    lualine_c = {
+      { "diagnostics", sources = { "nvim_lsp" } },
+      function()
+        return "%="
+      end,
+      "filename",
+    },
+    lualine_x = { "filetype" },
+    lualine_y = {
+      {
+        "progress",
+      },
+    },
+    lualine_z = {
+      {
+        "location",
+        icon = "",
+      },
+    },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  extensions = {},
+})
 
 --Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
@@ -125,11 +170,8 @@ require('telescope').setup {
 vim.api.nvim_set_keymap('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>o', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
--- vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>/', ':noh<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>s', ':StripWhitespace<CR>', { noremap = true, silent = true })
