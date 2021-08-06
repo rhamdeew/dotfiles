@@ -122,3 +122,6 @@ alias gmef='fzf-git-merge'
 
 # Init zoxide
 eval "$(zoxide init zsh)"
+
+source ~/.config/broot/launcher/bash/br
+alias brw='br -w'
