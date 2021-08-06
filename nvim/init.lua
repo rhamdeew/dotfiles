@@ -1,4 +1,15 @@
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
+local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
+local g = vim.g -- a table to access global variables
+local opt = vim.opt -- to set options
+
+local function map(mode, lhs, rhs, opts)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -23,6 +34,7 @@ require('packer').startup(function()
   use 'b3nj5m1n/kommentary'
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } } }
+  -- Appearance
   use 'sainnhe/everforest'
   use 'kyazdani42/nvim-web-devicons'
   use 'hoob3rt/lualine.nvim'
@@ -36,9 +48,11 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
+  use 'glepnir/lspsaga.nvim'
   -- use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'easymotion/vim-easymotion' -- easymotion
   use 'ntpeters/vim-better-whitespace'
+  use 'alvan/vim-closetag'
 end)
 
 --Incremental live completion
@@ -199,8 +213,8 @@ local on_attach = function(_, bufnr)
 
   local opts = { noremap = true, silent = true }
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
@@ -328,22 +342,68 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+-- LSP Saga config & keys https://github.com/glepnir/lspsaga.nvim
+local saga = require("lspsaga")
+saga.init_lsp_saga({
+  code_action_icon = " ",
+  definition_preview_icon = "  ",
+  dianostic_header_icon = "   ",
+  error_sign = " ",
+  finder_definition_icon = "  ",
+  finder_reference_icon = "  ",
+  hint_sign = "⚡",
+  infor_sign = "",
+  warn_sign = "",
+})
+
+map("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>", { silent = true })
+-- map("n", "<leader>ca", ":Lspsaga code_action<CR>", { silent = true })
+-- map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>", { silent = true })
+map("n", "<leader>ch", ":Lspsaga hover_doc<CR>", { silent = true })
+-- map("n", "<leader>ck", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', { silent = true })
+-- map("n", "<leader>cj", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', { silent = true })
+-- map("n", "<leader>cs", ":Lspsaga signature_help<CR>", { silent = true })
+-- map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>", { silent = true })
+map("n", "<leader>cn", ":Lspsaga diagnostic_jump_next<CR>", { silent = true })
+map("n", "<leader>cp", ":Lspsaga diagnostic_jump_prev<CR>", { silent = true })
+map("n", "<leader>cr", ":Lspsaga rename<CR>", { silent = true })
+map("n", "<leader>cd", ":Lspsaga preview_definition<CR>", { silent = true })
+
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
 -- Compe setup
-require('compe').setup {
+require("compe").setup({
+  enabled = true,
+  autocomplete = true,
+  debug = false,
+  min_length = 1,
+  preselect = "enable",
+  throttle_time = 80,
+  source_timeout = 200,
+  resolve_timeout = 800,
+  incomplete_delay = 400,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
+  documentation = {
+    border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
+    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+    max_width = 120,
+    min_width = 60,
+    max_height = math.floor(vim.o.lines * 0.3),
+    min_height = 1,
+  },
   source = {
     path = true,
+    buffer = true,
+    calc = true,
     nvim_lsp = true,
-    -- luasnip = true,
-    buffer = false,
-    calc = false,
-    nvim_lua = false,
+    nvim_lua = true,
     vsnip = false,
-    ultisnips = false,
+    luasnip = false,
   },
-}
+})
 
 -- Utility functions for compe and luasnip
 local t = function(str)
