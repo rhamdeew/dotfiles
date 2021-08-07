@@ -87,7 +87,6 @@ map <C-k> <C-w><Up>
 map <C-j> <C-w><Down>
 map <C-l> <C-w><Right>
 map <C-h> <C-w><Left>
-nmap     <leader>fr <Plug>CtrlSFPrompt
 
 " Replace visual selection by pressing Ctrl+R
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>

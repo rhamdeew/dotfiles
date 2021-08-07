@@ -186,15 +186,15 @@ require('telescope').setup {
 }
 
 --Add leader shortcuts
+map('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
+map('n', '<leader>/', ':noh<CR>', { noremap = true, silent = true })
+map('n', '<leader>s', ':StripWhitespace<CR>', { noremap = true, silent = true })
+map('n', '<leader>fp', ':let @+ = expand("%")<CR>', { noremap = true, silent = true })
 map('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>o', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
-map('n', '<leader>/', ':noh<CR>', { noremap = true, silent = true })
-map('n', '<leader>s', ':StripWhitespace<CR>', { noremap = true, silent = true })
-map('n', '<leader>fp', ':let @+ = expand("%")<CR>', { noremap = true, silent = true })
-map('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
 map('n', '<leader>f', '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes").get_dropdown({}))<cr>')
 map('n', '<leader>i', '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes").get_dropdown({}))<cr>')
 map('n', '<leader><leader>w', "<cmd>lua require'hop'.hint_words()<cr>", {})
