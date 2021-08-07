@@ -6,7 +6,7 @@ local opt = vim.opt -- to set options
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
   if opts then
-    options = vim.tbl_extend("force", options, opts)
+    options = vim.tbl_extend('force', options, opts)
   end
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
@@ -49,11 +49,16 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'glepnir/lspsaga.nvim'
-  -- use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'easymotion/vim-easymotion' -- easymotion
   use 'ntpeters/vim-better-whitespace'
   use 'alvan/vim-closetag'
+  use 'blackCauldron7/surround.nvim'
+  use 'rafamadriz/friendly-snippets'
+  use 'L3MON4D3/LuaSnip' -- Snippets plugin
 end)
+
+require('surround').setup({})
+require('luasnip/loaders/from_vscode').load()
 
 --Incremental live completion
 vim.o.inccommand = 'nosplit'
@@ -85,17 +90,17 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
 -- Colourscheme config
-vim.g.everforest_background = "soft"
+vim.g.everforest_background = 'soft'
 vim.g.everforest_enable_italic = 1
 vim.g.everforest_diagnostic_text_highlight = 1
-vim.g.everforest_diagnostic_virtual_text = "colored"
-vim.g.everforest_current_word = "bold"
+vim.g.everforest_diagnostic_virtual_text = 'colored'
+vim.g.everforest_current_word = 'bold'
 
 -- Load the colorscheme
 cmd([[colorscheme everforest]]) -- Put your favorite colorscheme here
 
 --Set statusbar
-require("lualine").setup({
+require('lualine').setup({
   options = {
     icons_enabled = true,
     theme = "everforest",
@@ -142,13 +147,13 @@ require("lualine").setup({
 })
 
 --Remap space as leader key
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
+map('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 --Remap for dealing with word wrap
-vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
-vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
+map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
+map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
 --Map blankline
 vim.g.indent_blankline_char = '·'
@@ -180,17 +185,19 @@ require('telescope').setup {
     },
   },
 }
+
 --Add leader shortcuts
-vim.api.nvim_set_keymap('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>o', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>/', ':noh<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>s', ':StripWhitespace<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>fp', ':let @+ = expand("%")<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
+map('n', '<leader>b', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>o', [[<cmd>lua require('telescope.builtin').find_files()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>/', ':noh<CR>', { noremap = true, silent = true })
+map('n', '<leader>s', ':StripWhitespace<CR>', { noremap = true, silent = true })
+map('n', '<leader>fp', ':let @+ = expand("%")<CR>', { noremap = true, silent = true })
+map('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
+map('n', '<leader>f', '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes").get_dropdown({}))<cr>')
+map('n', '<leader>i', '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes").get_dropdown({}))<cr>')
 
 -- Highlight on yank
 vim.api.nvim_exec(
@@ -204,7 +211,14 @@ vim.api.nvim_exec(
 )
 
 -- Y yank until the end of line
-vim.api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true })
+map('n', 'Y', 'y$', { noremap = true })
+
+-- Easy select all of file
+map('n', '<Leader>sa', 'ggVG<c-$>')
+
+-- Tab to switch buffers in Normal mode
+map('n', '<Tab>', ':bnext<CR>')
+map('n', '<S-Tab>', ':bprevious<CR>')
 
 -- LSP settings
 local nvim_lsp = require 'lspconfig'
@@ -212,24 +226,16 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = true, silent = true }
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
 
@@ -251,43 +257,6 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-
--- Example custom server
-local sumneko_root_path = vim.fn.getenv("HOME").."/.local/bin/sumneko_lua" -- Change to your sumneko root installation
-local sumneko_binary = sumneko_root_path .. '/bin/linux/lua-language-server'
-
--- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
-
-require('lspconfig').sumneko_lua.setup {
-  cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
@@ -343,7 +312,7 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- LSP Saga config & keys https://github.com/glepnir/lspsaga.nvim
-local saga = require("lspsaga")
+local saga = require('lspsaga')
 saga.init_lsp_saga({
   code_action_icon = " ",
   definition_preview_icon = "  ",
@@ -356,54 +325,57 @@ saga.init_lsp_saga({
   warn_sign = "",
 })
 
-map("n", "<Leader>cf", ":Lspsaga lsp_finder<CR>", { silent = true })
--- map("n", "<leader>ca", ":Lspsaga code_action<CR>", { silent = true })
--- map("v", "<leader>ca", ":<C-U>Lspsaga range_code_action<CR>", { silent = true })
-map("n", "<leader>ch", ":Lspsaga hover_doc<CR>", { silent = true })
--- map("n", "<leader>ck", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', { silent = true })
--- map("n", "<leader>cj", '<cmd>lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', { silent = true })
--- map("n", "<leader>cs", ":Lspsaga signature_help<CR>", { silent = true })
--- map("n", "<leader>ci", ":Lspsaga show_line_diagnostics<CR>", { silent = true })
-map("n", "<leader>cn", ":Lspsaga diagnostic_jump_next<CR>", { silent = true })
-map("n", "<leader>cp", ":Lspsaga diagnostic_jump_prev<CR>", { silent = true })
-map("n", "<leader>cr", ":Lspsaga rename<CR>", { silent = true })
-map("n", "<leader>cd", ":Lspsaga preview_definition<CR>", { silent = true })
+map('n', '<Leader>cf', ':Lspsaga lsp_finder<CR>', { silent = true })
+map('n', '<leader>ch', ':Lspsaga hover_doc<CR>', { silent = true })
+map('n', '<leader>cd', ':Lspsaga preview_definition<CR>', { silent = true })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
 -- Compe setup
-require("compe").setup({
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "enable",
-  throttle_time = 80,
-  source_timeout = 200,
-  resolve_timeout = 800,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = {
-    border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
-    winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
-    max_width = 120,
-    min_width = 60,
-    max_height = math.floor(vim.o.lines * 0.3),
-    min_height = 1,
-  },
+-- require('compe').setup({
+--   enabled = true,
+--   autocomplete = true,
+--   debug = false,
+--   min_length = 1,
+--   preselect = "enable",
+--   throttle_time = 80,
+--   source_timeout = 200,
+--   resolve_timeout = 800,
+--   incomplete_delay = 400,
+--   max_abbr_width = 100,
+--   max_kind_width = 100,
+--   max_menu_width = 100,
+--   documentation = {
+--     border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
+--     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+--     max_width = 120,
+--     min_width = 60,
+--     max_height = math.floor(vim.o.lines * 0.3),
+--     min_height = 1,
+--   },
+--   source = {
+--     path = true,
+--     buffer = true,
+--     calc = true,
+--     nvim_lsp = true,
+--     nvim_lua = true,
+--     vsnip = true,
+--     luasnip = true,
+--   },
+-- })
+require('compe').setup {
   source = {
     path = true,
-    buffer = true,
-    calc = true,
     nvim_lsp = true,
-    nvim_lua = true,
+    luasnip = true,
+    buffer = false,
+    calc = false,
+    nvim_lua = false,
     vsnip = false,
-    luasnip = false,
+    ultisnips = false,
   },
-})
+}
 
 -- Utility functions for compe and luasnip
 local t = function(str)
@@ -422,13 +394,13 @@ end
 -- Use (s-)tab to:
 --- move to prev/next item in completion menuone
 --- jump to prev/next snippet's placeholder
--- local luasnip = require 'luasnip'
+local luasnip = require 'luasnip'
 
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t '<C-n>'
-  -- elseif luasnip.expand_or_jumpable() then
-  --   return t '<Plug>luasnip-expand-or-jump'
+  elseif luasnip.expand_or_jumpable() then
+    return t '<Plug>luasnip-expand-or-jump'
   elseif check_back_space() then
     return t '<Tab>'
   else
@@ -439,27 +411,27 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t '<C-p>'
-  -- elseif luasnip.jumpable(-1) then
-  --   return t '<Plug>luasnip-jump-prev'
+  elseif luasnip.jumpable(-1) then
+    return t '<Plug>luasnip-jump-prev'
   else
     return t '<S-Tab>'
   end
 end
 
 -- Map tab to the above tab complete functiones
-vim.api.nvim_set_keymap('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-vim.api.nvim_set_keymap('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-vim.api.nvim_set_keymap('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
+map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
 
 -- Map compe confirm and complete functions
-vim.api.nvim_set_keymap('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
-vim.api.nvim_set_keymap('i', '<c-space>', 'compe#complete()', { expr = true })
+map('i', '<cr>', 'compe#confirm("<cr>")', { expr = true })
+map('i', '<c-space>', 'compe#complete()', { expr = true })
 
-vim.api.nvim_set_keymap('', '<C-k>', '<C-w><Up>', {})
-vim.api.nvim_set_keymap('', '<C-j>', '<C-w><Down>', {})
-vim.api.nvim_set_keymap('', '<C-l>', '<C-w><Right>', {})
-vim.api.nvim_set_keymap('', '<C-h>', '<C-w><Left>', {})
+map('', '<C-k>', '<C-w><Up>', {})
+map('', '<C-j>', '<C-w><Down>', {})
+map('', '<C-l>', '<C-w><Right>', {})
+map('', '<C-h>', '<C-w><Left>', {})
 
 vim.cmd 'set tabstop=4 shiftwidth=4 softtabstop=4 expandtab'
 vim.cmd 'autocmd Filetype ruby setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2'
