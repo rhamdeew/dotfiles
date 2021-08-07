@@ -49,7 +49,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
   use 'glepnir/lspsaga.nvim'
-  use 'easymotion/vim-easymotion' -- easymotion
+  use 'phaazon/hop.nvim'
   use 'ntpeters/vim-better-whitespace'
   use 'alvan/vim-closetag'
   use 'blackCauldron7/surround.nvim'
@@ -60,7 +60,6 @@ end)
 require('surround').setup({})
 require('luasnip/loaders/from_vscode').load()
 
---Incremental live completion
 vim.o.inccommand = 'nosplit'
 
 --Set highlight on search
@@ -198,6 +197,8 @@ map('n', '<leader>fp', ':let @+ = expand("%")<CR>', { noremap = true, silent = t
 map('n', '<leader>w', ':w<CR>', { noremap = true, silent = true })
 map('n', '<leader>f', '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes").get_dropdown({}))<cr>')
 map('n', '<leader>i', '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes").get_dropdown({}))<cr>')
+map('n', '<leader><leader>w', "<cmd>lua require'hop'.hint_words()<cr>", {})
+map('n', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 
 -- Highlight on yank
 vim.api.nvim_exec(
@@ -217,6 +218,7 @@ map('n', 'Y', 'y$', { noremap = true })
 map('n', '<Leader>sa', 'ggVG<c-$>')
 
 -- Tab to switch buffers in Normal mode
+--Incremental live completion
 map('n', '<Tab>', ':bnext<CR>')
 map('n', '<S-Tab>', ':bprevious<CR>')
 
@@ -332,38 +334,6 @@ map('n', '<leader>cd', ':Lspsaga preview_definition<CR>', { silent = true })
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
--- Compe setup
--- require('compe').setup({
---   enabled = true,
---   autocomplete = true,
---   debug = false,
---   min_length = 1,
---   preselect = "enable",
---   throttle_time = 80,
---   source_timeout = 200,
---   resolve_timeout = 800,
---   incomplete_delay = 400,
---   max_abbr_width = 100,
---   max_kind_width = 100,
---   max_menu_width = 100,
---   documentation = {
---     border = { "", "", "", " ", "", "", "", " " }, -- the border option is the same as `|help nvim_open_win|`
---     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
---     max_width = 120,
---     min_width = 60,
---     max_height = math.floor(vim.o.lines * 0.3),
---     min_height = 1,
---   },
---   source = {
---     path = true,
---     buffer = true,
---     calc = true,
---     nvim_lsp = true,
---     nvim_lua = true,
---     vsnip = true,
---     luasnip = true,
---   },
--- })
 require('compe').setup {
   source = {
     path = true,
