@@ -199,6 +199,8 @@ map('n', '<leader>f', '<cmd>lua require("telescope.builtin").file_browser(requir
 map('n', '<leader>i', '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes").get_dropdown({}))<cr>')
 map('n', '<leader><leader>w', "<cmd>lua require'hop'.hint_words()<cr>", {})
 map('n', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
+map('n', '<leader>]', ':tabn<cr>', { noremap = true, silent = true })
+map('n', '<leader>[', ':tabp<cr>', { noremap = true, silent = true })
 
 -- Highlight on yank
 vim.api.nvim_exec(
