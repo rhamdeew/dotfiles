@@ -55,6 +55,7 @@ require('packer').startup(function()
   use 'blackCauldron7/surround.nvim'
   use 'rafamadriz/friendly-snippets'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+  use 'editorconfig/editorconfig-vim'
 end)
 
 require('surround').setup({})
