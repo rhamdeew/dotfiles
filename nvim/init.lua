@@ -60,6 +60,7 @@ end)
 
 require('surround').setup({})
 require('luasnip/loaders/from_vscode').load()
+require'hop'.setup()
 
 vim.o.inccommand = 'nosplit'
 
