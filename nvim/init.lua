@@ -48,7 +48,6 @@ require('packer').startup(function()
   use 'nvim-treesitter/nvim-treesitter-textobjects'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
   use 'hrsh7th/nvim-compe' -- Autocompletion plugin
-  use 'glepnir/lspsaga.nvim'
   use 'phaazon/hop.nvim'
   use 'ntpeters/vim-better-whitespace'
   use 'alvan/vim-closetag'
@@ -316,24 +315,6 @@ require('nvim-treesitter.configs').setup {
     },
   },
 }
-
--- LSP Saga config & keys https://github.com/glepnir/lspsaga.nvim
-local saga = require('lspsaga')
-saga.init_lsp_saga({
-  code_action_icon = " ",
-  definition_preview_icon = "  ",
-  dianostic_header_icon = "   ",
-  error_sign = " ",
-  finder_definition_icon = "  ",
-  finder_reference_icon = "  ",
-  hint_sign = "⚡",
-  infor_sign = "",
-  warn_sign = "",
-})
-
-map('n', '<Leader>cf', ':Lspsaga lsp_finder<CR>', { silent = true })
-map('n', '<leader>ch', ':Lspsaga hover_doc<CR>', { silent = true })
-map('n', '<leader>cd', ':Lspsaga preview_definition<CR>', { silent = true })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
