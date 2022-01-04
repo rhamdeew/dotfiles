@@ -37,7 +37,8 @@ require('packer').startup(function()
   -- Appearance
   use 'sainnhe/everforest'
   use 'kyazdani42/nvim-web-devicons'
-  use 'hoob3rt/lualine.nvim'
+  -- use 'hoob3rt/lualine.nvim'
+  use 'feline-nvim/feline.nvim'
   -- Add indentation guides even on blank lines
   use 'lukas-reineke/indent-blankline.nvim'
   -- Add git related info in the signs columns and popups
@@ -60,11 +61,13 @@ require('packer').startup(function()
   use 'saadparwaiz1/cmp_luasnip'
   use "rafamadriz/friendly-snippets"
   use 'editorconfig/editorconfig-vim'
+  use 'kyazdani42/nvim-tree.lua'
 end)
 
 require('surround').setup({})
 require('luasnip/loaders/from_vscode').lazy_load()
 require('hop').setup()
+require('nvim-tree').setup()
 
 vim.o.inccommand = 'nosplit'
 
@@ -94,6 +97,8 @@ vim.o.smartcase = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
+vim.opt.termguicolors = true
+
 -- Colourscheme config
 vim.g.everforest_background = 'soft'
 vim.g.everforest_enable_italic = 1
@@ -104,52 +109,22 @@ vim.g.everforest_current_word = 'bold'
 -- Load the colorscheme
 cmd([[colorscheme everforest]]) -- Put your favorite colorscheme here
 
---Set statusbar
-require('lualine').setup({
-  options = {
-    icons_enabled = true,
-    theme = "everforest",
-    component_separators = { " ", " " },
-    section_separators = { "", "" },
-    disabled_filetypes = {},
-  },
-  sections = {
-    lualine_a = { "mode", "paste" },
-    lualine_b = {
-      { "branch", icon = "" },
-      { "diff", color_added = "#a7c080", color_modified = "#ffdf1b", color_removed = "#ff6666" },
-    },
-    lualine_c = {
-      { "diagnostics", sources = { "nvim_diagnostic" } },
-      function()
-        return "%="
-      end,
-      "filename",
-    },
-    lualine_x = { "filetype" },
-    lualine_y = {
-      {
-        "progress",
-      },
-    },
-    lualine_z = {
-      {
-        "location",
-        icon = "",
-      },
-    },
-  },
-  inactive_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { "filename" },
-    lualine_x = { "location" },
-    lualine_y = {},
-    lualine_z = {},
-  },
-  tabline = {},
-  extensions = {},
-})
+local colors = {
+  bg = '#282828',
+  black = '#282828',
+  yellow = '#d8a657',
+  cyan = '#89b482',
+  oceanblue = '#45707a',
+  green = '#a9b665',
+  orange = '#e78a4e',
+  violet = '#d3869b',
+  magenta = '#c14a4a',
+  white = '#c9c0b1',
+  fg = '#c9c0b1',
+  skyblue = '#7daea3',
+  red = '#ea6962',
+}
+require('feline').setup({theme = colors})
 
 --Remap space as leader key
 map('', '<Space>', '<Nop>', { noremap = true, silent = true })
@@ -201,12 +176,12 @@ map('n', '<leader>o', [[<cmd>lua require('telescope.builtin').find_files({ find_
 map('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 map('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
-map('n', '<leader>f', '<cmd>lua require("telescope.builtin").file_browser(require("telescope.themes").get_dropdown({}))<cr>')
 map('n', '<leader>i', '<cmd>lua require("telescope.builtin").git_status(require("telescope.themes").get_dropdown({}))<cr>')
 map('n', '<leader><leader>w', "<cmd>lua require'hop'.hint_words()<cr>", {})
 map('n', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 map('n', '<leader>]', ':tabn<cr>', { noremap = true, silent = true })
 map('n', '<leader>[', ':tabp<cr>', { noremap = true, silent = true })
+map('n', '<C-b>', ':NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
 
 -- Highlight on yank
 vim.api.nvim_exec(
