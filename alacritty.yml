@@ -66,8 +66,7 @@ font:
   # The bold font face
   bold:
     family: JetBrains Mono
-    style: Regular
-    #style: Bold
+    style: SemiBold
 
   # The italic font face
   italic:
@@ -172,7 +171,7 @@ bell:
   duration: 0
 
 # Background opacity
-background_opacity: 0.95
+window.opacity: 0.95
 
 # Mouse bindings
 #

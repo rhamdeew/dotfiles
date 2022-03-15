@@ -56,7 +56,6 @@ require('packer').startup(function()
   use 'phaazon/hop.nvim'
   use 'ntpeters/vim-better-whitespace'
   use 'alvan/vim-closetag'
-  use 'blackCauldron7/surround.nvim'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'saadparwaiz1/cmp_luasnip'
   use "rafamadriz/friendly-snippets"
@@ -64,7 +63,6 @@ require('packer').startup(function()
   use 'kyazdani42/nvim-tree.lua'
 end)
 
-require('surround').setup({})
 require('luasnip/loaders/from_vscode').lazy_load()
 require('hop').setup()
 require('nvim-tree').setup()
