@@ -60,6 +60,7 @@ require('packer').startup(function()
   use "rafamadriz/friendly-snippets"
   use 'editorconfig/editorconfig-vim'
   use 'kyazdani42/nvim-tree.lua'
+  use 'APZelos/blamer.nvim'
 end)
 
 require('luasnip/loaders/from_vscode').lazy_load()
@@ -298,7 +299,7 @@ cmp.setup({
       require('luasnip').lsp_expand(args.body)
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ["<C-j>"] = cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Insert}),
@@ -306,7 +307,7 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), {"i", "s"}),
     ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), {"i", "s"}),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  },
+  }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
@@ -317,6 +318,7 @@ cmp.setup({
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     { name = 'buffer' }
   }
@@ -324,6 +326,7 @@ cmp.setup.cmdline('/', {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
