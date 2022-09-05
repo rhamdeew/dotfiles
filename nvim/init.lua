@@ -1,3 +1,4 @@
+require('impatient')
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
@@ -61,11 +62,17 @@ require('packer').startup(function()
   use 'editorconfig/editorconfig-vim'
   use 'kyazdani42/nvim-tree.lua'
   use 'APZelos/blamer.nvim'
+  use 'lewis6991/impatient.nvim'
+  use 'nathom/filetype.nvim'
+  use 'antoinemadec/FixCursorHold.nvim'
+  use 'Pocco81/auto-save.nvim'
+  use 'AndrewRadev/splitjoin.vim'
 end)
 
 require('luasnip/loaders/from_vscode').lazy_load()
 require('hop').setup()
 require('nvim-tree').setup()
+require("auto-save").setup()
 
 vim.o.inccommand = 'nosplit'
 
