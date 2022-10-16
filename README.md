@@ -2,10 +2,10 @@
 
 ### Change directory
 
-```
-cd ~/Downloads – cdd
-cd ~/Work – cdw
-```
+
+`cdd` – `cd ~/Downloads`
+
+`cdw` – `cd ~/Work`
 
 **Zoxide**
 
@@ -15,34 +15,43 @@ z <anything>
 
 ### Git commands
 
-```
-git status --short – gs
-git add – ga
-```
 
-```
-git branch – gb
-git checkout – gc
-git merge – gme
-git diff – gd
-```
+`gs` – `git status --short`  
 
-```
-git log – gl
-git log -p – glp
-git log --name-only – gln
-```
+`ga` – `git add`
 
-```
-git commit -v – gcv
-git commit -m – gcm
-git commit --amend – gca
-```
+---
 
-```
-git pull origin – gplo
-git push origin – gpso
-```
+`gb` – `git branch`  
+
+`gc` – `git checkout`
+
+`gme` – `git merge`
+
+`gd` – `git diff`
+
+---
+
+`gl` – `git log`
+
+`glp` – `git log -p`
+
+`gln` – `git log --name-only`
+
+---
+
+`gcv` – `git commit -v`
+
+`gcm` – `git commit -m`
+
+`gca` – `git commit --amend`
+
+---
+
+`gplo` – `git pull origin`
+
+`gpso` – `git push origin`
+
 
 ## Software version management
 
