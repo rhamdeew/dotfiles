@@ -6,34 +6,6 @@ export LC_MESSAGES=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-
-
-# Disable unused Spacehsip options
-SPACESHIP_HG_SHOW=false
-SPACESHIP_HG_BRANCH_SHOW=false
-SPACESHIP_HG_STATUS_SHOW=false
-SPACESHIP_ELM_SHOW=false
-SPACESHIP_ELIXIR_SHOW=false
-SPACESHIP_XCODE_SHOW_LOCAL=false
-SPACESHIP_SWIFT_SHOW_LOCAL=false
-SPACESHIP_GOLANG_SHOW=false
-SPACESHIP_RUST_SHOW=false
-SPACESHIP_HASKELL_SHOW=false
-SPACESHIP_JULIA_SHOW=false
-SPACESHIP_DOCKER_SHOW=false
-SPACESHIP_DOCKER_CONTEXT_SHOW=false
-SPACESHIP_AWS_SHOW=false
-SPACESHIP_GCLOUD_SHOW=false
-SPACESHIP_CONDA_SHOW=false
-SPACESHIP_DOTNET_SHOW=false
-SPACESHIP_EMBER_SHOW=false
-SPACESHIP_KUBECTL_VERSION_SHOW=false
-SPACESHIP_KUBECONTEXT_SHOW=false
-
-
 # Bind Fn+<-/Fn+-> to move begin/end of line
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
@@ -49,10 +21,10 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
+setopt prompt_subst
 
 
 #Aliases
-
 export NOTES_DIR="~/.notes/"
 # Personal work-related settings
 [ -f ~/.zshrc_work ] && source ~/.zshrc_work
@@ -114,6 +86,8 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 autoload -U fzf-git-branch
 autoload -U fzf-git-checkout
 autoload -U fzf-git-merge
+autoload -U git-branch-name
+
 
 alias gbf='fzf-git-branch'
 alias gcf='fzf-git-checkout'
@@ -125,3 +99,7 @@ eval "$(zoxide init zsh)"
 
 source ~/.config/broot/launcher/bash/br
 alias brw='br -w'
+
+
+# Display current git branch name
+prompt='%F{cyan}%n%f:%1~$(git-branch-name)%F{cyan}>%f '
