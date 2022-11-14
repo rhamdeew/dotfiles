@@ -1,5 +1,5 @@
 git-branch-name() {
-  branch=$(git symbolic-ref HEAD 2> /dev/null | awk 'BEGIN{FS="/"} {print $NF}')
+  branch=$(git symbolic-ref HEAD 2> /dev/null | sed 's/refs\/heads\///g')
   if [[ $branch == "" ]];
   then
     echo ' '
