@@ -93,6 +93,7 @@ alias gbf='fzf-git-branch'
 alias gcf='fzf-git-checkout'
 alias gmef='fzf-git-merge'
 
+alias m='make'
 
 # Init zoxide
 eval "$(zoxide init zsh)"
