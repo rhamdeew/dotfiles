@@ -61,10 +61,8 @@ require('packer').startup(function()
   use "rafamadriz/friendly-snippets"
   use 'editorconfig/editorconfig-vim'
   use 'kyazdani42/nvim-tree.lua'
-  use 'APZelos/blamer.nvim'
   use 'lewis6991/impatient.nvim'
   use 'nathom/filetype.nvim'
-  use 'antoinemadec/FixCursorHold.nvim'
   use 'Pocco81/auto-save.nvim'
   use 'AndrewRadev/splitjoin.vim'
 end)

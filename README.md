@@ -125,21 +125,30 @@ LSP Saga: preview definition – <Space>cd
   -     nvim-lua/plenary.nvim
   - sainnhe/everforest
   - kyazdani42/nvim-web-devicons
-  - hoob3rt/lualine.nvim
+  - feline-nvim/feline.nvim
   - lukas-reineke/indent-blankline.nvim
   - lewis6991/gitsigns.nvim
   -     nvim-lua/plenary.nvim
   - nvim-treesitter/nvim-treesitter
   - nvim-treesitter/nvim-treesitter-textobjects
   - neovim/nvim-lspconfig
-  - hrsh7th/nvim-compe
-  - glepnir/lspsaga.nvim
+  - hrsh7th/nvim-cmp
+  -     hrsh7th/cmp-nvim-lsp
+  -     hrsh7th/cmp-buffer
+  -     hrsh7th/cmp-path
+  -     hrsh7th/cmp-cmdline
   - phaazon/hop.nvim
   - ntpeters/vim-better-whitespace
   - alvan/vim-closetag
-  - blackCauldron7/surround.nvim
   - rafamadriz/friendly-snippets
   - L3MON4D3/LuaSnip
+  -     saadparwaiz1/cmp_luasnip
+  - editorconfig/editorconfig-vim
+  - kyazdani42/nvim-tree.lua
+  - lewis6991/impatient.nvim
+  - nathom/filetype.nvim
+  - Pocco81/auto-save.nvim
+  - AndrewRadev/splitjoin.vim
 
 ## Vim
 
