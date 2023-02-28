@@ -6,6 +6,10 @@ export LC_MESSAGES=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 
 
+fpath+=($HOME/.zsh/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
 # Bind Fn+<-/Fn+-> to move begin/end of line
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
@@ -32,49 +36,10 @@ export NOTES_DIR="~/.notes/"
 [ -f ~/.shared_aliases ] && source ~/.shared_aliases
 
 
-# Lang related aliases
-# --------------------
-
-
 # Python
 
 # Poetry
 alias po='poetry'
-# Use Pyenv
-alias pyenvi='eval "$(pyenv init -)"'
-
-
-# Node
-
-# Use NVM
-# This lazy loads nvm
-export NVM_DIR="$HOME/.nvm"
-nvm() {
-  unset -f nvm
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use # This loads nvm
-  nvm $@
-}
-
-# This resolves the default node version
-DEFAULT_NODE_VER="$( (< "$NVM_DIR/alias/default" || < ~/.nvmrc) 2> /dev/null)"
-while [ -s "$NVM_DIR/alias/$DEFAULT_NODE_VER" ] && [ ! -z "$DEFAULT_NODE_VER" ]; do
-  DEFAULT_NODE_VER="$(<"$NVM_DIR/alias/$DEFAULT_NODE_VER")"
-done
-
-# This adds the default node version to PATH
-if [ ! -z "$DEFAULT_NODE_VER" ]; then
-  export PATH="$NVM_DIR/versions/node/v${DEFAULT_NODE_VER#v}/bin:$PATH"
-fi
-
-
-# Ruby
-
-# Use Rbenv
-alias rbenvi='eval "$(rbenv init -)"'
-
-
-# Run Neovim with init pyenv and rbenv
-alias nv='pyenvi && rbenvi && nvim'
 
 
 # Enable fzf auto-completions
@@ -94,6 +59,8 @@ alias gcf='fzf-git-checkout'
 alias gmef='fzf-git-merge'
 
 alias m='make'
+alias v='vim'
+alias nv='nvim'
 
 # Init zoxide
 eval "$(zoxide init zsh)"
@@ -103,4 +70,7 @@ alias brw='br -w'
 
 
 # Display current git branch name
-prompt='%F{cyan}%n%f:%1~$(git-branch-name)%F{cyan}>%f '
+# prompt='%F{cyan}%n%f:%1~$(git-branch-name)%F{cyan}>%f '
+
+source /Users/rail/.config/broot/launcher/bash/br
+eval "$(rtx activate zsh)"

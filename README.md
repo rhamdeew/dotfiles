@@ -55,23 +55,9 @@ z <anything>
 
 ## Software version management
 
-**Use NVM**
+**Use RTX**
 
-```
-nvm
-```
-
-**Use Pyenv**
-
-```
-eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)" – pyenvi
-```
-
-**Use Rbenv**
-
-```
-eval "$(rbenv init -)" – rbenvi
-```
+`rtx`
 
 
 ## Ripgrep

@@ -16,7 +16,6 @@ Plug 'tpope/vim-commentary'
 Plug 'joshdick/onedark.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
-Plug 'mcchrish/nnn.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'editorconfig/editorconfig-vim'
 
