@@ -189,8 +189,8 @@ NNN – <Space>n
   - joshdick/onedark.vim
   - airblade/vim-gitgutter
   - easymotion/vim-easymotion
-  - mcchrish/nnn.vim
   - tmux-plugins/vim-tmux-focus-events
+  - editorconfig/editorconfig-vim
 
 
 ## Alacritty
