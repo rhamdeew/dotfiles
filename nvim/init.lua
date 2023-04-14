@@ -58,7 +58,7 @@ require('packer').startup(function()
   use 'alvan/vim-closetag'
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
   use 'saadparwaiz1/cmp_luasnip'
-  use "rafamadriz/friendly-snippets"
+  use 'rafamadriz/friendly-snippets'
   use 'editorconfig/editorconfig-vim'
   use 'kyazdani42/nvim-tree.lua'
   use 'lewis6991/impatient.nvim'
