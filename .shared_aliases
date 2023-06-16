@@ -22,6 +22,7 @@ alias gpsov='git push --no-verify origin $(git branch --show-current)'
 alias gpsof='git push --force origin $(git branch --show-current)'
 alias gpsofv='git push --force --no-verify origin $(git branch --show-current)'
 alias gpsovf=gpsofv
+alias gcp='git cherry-pick'
 alias gl='git log'
 alias glp='git log -p'
 alias gln='git log --name-only'
