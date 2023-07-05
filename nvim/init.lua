@@ -1,4 +1,4 @@
-require('impatient')
+vim.loader.enable()
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
@@ -61,10 +61,10 @@ require('packer').startup(function()
   use 'rafamadriz/friendly-snippets'
   use 'editorconfig/editorconfig-vim'
   use 'kyazdani42/nvim-tree.lua'
-  use 'lewis6991/impatient.nvim'
   use 'nathom/filetype.nvim'
   use 'Pocco81/auto-save.nvim'
   use 'AndrewRadev/splitjoin.vim'
+  use 'nvim-pack/nvim-spectre'
 end)
 
 require('luasnip/loaders/from_vscode').lazy_load()
@@ -185,6 +185,9 @@ map('n', '<leader><leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", {})
 map('n', '<leader>]', ':tabn<cr>', { noremap = true, silent = true })
 map('n', '<leader>[', ':tabp<cr>', { noremap = true, silent = true })
 map('n', '<C-b>', ':NvimTreeFindFileToggle<cr>', { noremap = true, silent = true })
+map('n', '<leader>S', [[<cmd>lua require("spectre").open()<CR>]], { noremap = true, silent = true })
+map('n', '<leader>SW', [[<cmd>lua require("spectre").open_visual({select_word=true})<CR>]], { noremap = true, silent = true })
+map('n', '<leader>SP', [[<cmd>lua require("spectre").open_file_search({select_word=true})<CR>]], { noremap = true, silent = true })
 
 -- Highlight on yank
 vim.api.nvim_exec(

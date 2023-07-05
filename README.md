@@ -30,6 +30,8 @@ z <anything>
 
 `gd` – `git diff`
 
+`gcp` - `git cherry-pick`
+
 ---
 
 `gl` – `git log`
@@ -51,6 +53,22 @@ z <anything>
 `gplo` – `git pull origin`
 
 `gpso` – `git push origin`
+
+`gpsov` - `git push --no-verify origin`
+
+`gpsof` - `git push --force origin`
+
+`gpsofv` - `git push --force --no-verify origin`
+
+`gpsovf` - `git push --force --no-verify origin`
+
+---
+
+`gda` - `git diff --color --name-only --diff-filter=A`
+
+`gdm` - `git diff --color --name-only --diff-filter=M`
+
+`gdd` - `git diff --color --name-only --diff-filter=D`
 
 
 ## Software version management
@@ -100,6 +118,7 @@ Telescope: Git Status – <Space> + i
 Telescope: Git Status – <Space> + i
 Hop: Hint Words – <Space><Space> + w
 Hop: Hint Lines – <Space><Space> + l
+Nvim Tree Find File Toggle - <C-b>
 
 Buf: Go to definition – gd
 Buf: References – gr
@@ -111,9 +130,10 @@ Buf: LSP rename – <Space>rn
 Buf: LSP code action – <Space>ca
 Buf: LSP symbols – <Space>so
 
-LSP Saga: lsp_finder – <Space>cf
-LSP Saga: hover doc – <Space>ch
-LSP Saga: preview definition – <Space>cd
+Spectre Search - <Space>S
+Spectre Search Current Word - <Space>SW
+Spectre Search Current Word on Current File- <Space>SP
+* - use <space>c to confirm replacement
 ```
 
 **Plugins:**
@@ -145,10 +165,10 @@ LSP Saga: preview definition – <Space>cd
   -     saadparwaiz1/cmp_luasnip
   - editorconfig/editorconfig-vim
   - kyazdani42/nvim-tree.lua
-  - lewis6991/impatient.nvim
   - nathom/filetype.nvim
   - Pocco81/auto-save.nvim
   - AndrewRadev/splitjoin.vim
+  - nvim-pack/nvim-spectre
 
 ## Vim
 
